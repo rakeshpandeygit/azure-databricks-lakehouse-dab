@@ -1,0 +1,22 @@
+resources:
+  jobs:
+    Sample_Job:
+      name: Sample Job
+      tasks:
+        - task_key: t_order_bronze
+          spark_python_task:
+            python_file: ../../src/python_script/order_bronze.py
+          environment_key: Default
+        - task_key: t_order_silver
+          depends_on:
+            - task_key: t_order_bronze
+          spark_python_task:
+            python_file: ../../src/python_script/order_silver.py
+          environment_key: Default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Default
+          spec:
+            environment_version: "6"
+      performance_target: PERFORMANCE_OPTIMIZED

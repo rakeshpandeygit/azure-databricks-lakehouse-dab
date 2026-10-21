@@ -1,0 +1,12 @@
+resources:
+  pipelines:
+    pipeline_sales_pipeline:
+      name: sales-pipeline
+      libraries:
+        - glob:
+            include: ../../src/sales_pipeline/transformations/**
+      schema: sales_db
+      photon: true
+      catalog: training_dev
+      serverless: true
+      root_path: ../../src/sales_pipeline
